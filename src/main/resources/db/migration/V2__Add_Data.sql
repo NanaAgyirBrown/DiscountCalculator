@@ -13,16 +13,16 @@ Insert into DiscountsTypes(Id, Name) values (1, 'Cash');
 Insert into DiscountsTypes(Id, Name) values (2, 'Percentage');
 
 
-Insert into Items(CategotId, ItemName, UnitPrice) values (2, 'Television', 125.00);
-Insert into Items(CategotId, ItemName, UnitPrice) values (2, 'Laptop', 1845.00);
-Insert into Items(CategotId, ItemName, UnitPrice) values (1, 'Apples', 1.15);
-Insert into Items(CategotId, ItemName, UnitPrice) values (1, 'Mangoes', 0.75);
-Insert into Items(CategotId, ItemName, UnitPrice) values (2, 'iPhone', 85.00);
-Insert into Items(CategotId, ItemName, UnitPrice) values (1, 'Sugar', 0.25);
-Insert into Items(CategotId, ItemName, UnitPrice) values (1, 'Milk', 1.92);
-Insert into Items(CategotId, ItemName, UnitPrice) values (2, 'Fan', 25.99);
-Insert into Items(CategotId, ItemName, UnitPrice) values (2, 'Rice cooker', 42.59);
-Insert into Items(CategotId, ItemName, UnitPrice) values (2, 'Lamp', 18.63);
+Insert into Items(CategoryId, ItemName, UnitPrice) values (2, 'Television', 125.00);
+Insert into Items(CategoryId, ItemName, UnitPrice) values (2, 'Laptop', 1845.00);
+Insert into Items(CategoryId, ItemName, UnitPrice) values (1, 'Apples', 1.15);
+Insert into Items(CategoryId, ItemName, UnitPrice) values (1, 'Mangoes', 0.75);
+Insert into Items(CategoryId, ItemName, UnitPrice) values (2, 'iPhone', 85.00);
+Insert into Items(CategoryId, ItemName, UnitPrice) values (1, 'Sugar', 0.25);
+Insert into Items(CategoryId, ItemName, UnitPrice) values (1, 'Milk', 1.92);
+Insert into Items(CategoryId, ItemName, UnitPrice) values (2, 'Fan', 25.99);
+Insert into Items(CategoryId, ItemName, UnitPrice) values (2, 'Rice cooker', 42.59);
+Insert into Items(CategoryId, ItemName, UnitPrice) values (2, 'Lamp', 18.63);
 
 Insert into Users(Name, UserTypeID, MembershipDate) values ('Kofi Mensah', 1, '2017-04-21 00:00:00');
 Insert into Users(Name, UserTypeID, MembershipDate) values ('Yaa Mansa', 3, '2020-10-10 00:00:00');

@@ -149,7 +149,7 @@ public class DiscountController {
         try{
             var invoice = _billCalculator.GetBill(cart);
 
-            if(invoice == null || invoice.BillId.equals("")){
+            if(invoice == null || invoice.getBillId().equals("")){
                 messages.add("Your invoice could not be calculated.");
                 return _responses.GetResponse(_operationStatus.Failed, _discountStatus.InValidObject, messages, invoice);
             }

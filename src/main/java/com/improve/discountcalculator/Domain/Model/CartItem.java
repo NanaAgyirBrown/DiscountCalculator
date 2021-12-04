@@ -8,18 +8,23 @@ import javax.validation.constraints.NotNull;
 public class CartItem {
     @NotNull
     @JsonProperty("item")
-    public int Item;
+    private final int item;
 
     @NotNull
     @NotBlank
     @JsonProperty("quantity")
-    public int Quantity;
+    private final int quantity;
+
+    public CartItem(int item, int quantity) {
+        this.item = item;
+        this.quantity = quantity;
+    }
 
     public int getItem() {
-        return Item;
+        return item;
     }
 
     public int getQuantity() {
-        return Quantity;
+        return quantity;
     }
 }

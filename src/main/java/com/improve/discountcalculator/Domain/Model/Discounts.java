@@ -5,22 +5,41 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 public class Discounts {
-    public final UUID Id;
+    private final UUID id;
     @NotNull
-    public final UserTypes UserType;
+    private final UserTypes userType;
     @NotNull
-    public final DiscountsType DiscountType;
+    private final DiscountsType discountType;
     @NotNull
-    public final BigDecimal DiscountValue;
+    private final BigDecimal discountValue;
     @NotNull
-    public final RulesAppliesTo RuleAppliesTo;
+    private final RulesAppliesTo ruleAppliesTo;
 
+    public UUID getId() {
+        return id;
+    }
+
+    public UserTypes getUserType() {
+        return userType;
+    }
+
+    public DiscountsType getDiscountType() {
+        return discountType;
+    }
+
+    public BigDecimal getDiscountValue() {
+        return discountValue;
+    }
+
+    public RulesAppliesTo getRuleAppliesTo() {
+        return ruleAppliesTo;
+    }
 
     public Discounts(UUID id, UserTypes userType, DiscountsType discountType, BigDecimal discountValue, RulesAppliesTo ruleAppliesTo) {
-        Id = id;
-        UserType = userType;
-        DiscountType = discountType;
-        DiscountValue = discountValue;
-        RuleAppliesTo = ruleAppliesTo;
+        this.id = id;
+        this.userType = userType;
+        this.discountType = discountType;
+        this.discountValue = discountValue;
+        this.ruleAppliesTo = ruleAppliesTo;
     }
 }

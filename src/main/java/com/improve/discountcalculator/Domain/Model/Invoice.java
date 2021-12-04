@@ -7,12 +7,16 @@ import java.util.List;
 
 public class Invoice extends Bill {
     @JsonProperty("Cart Items")
-    public final List<PrepItems> PrepItems;
+    private final List<PrepItems> prepItems;
+
+    public List<PrepItems> getPrepItems() {
+        return prepItems;
+    }
 
     public Invoice(List<PrepItems> items, User user, Discounts discounts,
                    BigDecimal totalAmount,BigDecimal discountableAmount,
                    BigDecimal discountAmount,BigDecimal amountPayable){
         super(user, discounts, totalAmount, discountableAmount, discountAmount, amountPayable);
-        this.PrepItems = items;
+        this.prepItems = items;
     }
 }

@@ -4,14 +4,26 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class UserTypes {
-    public int Id;
+    private int id;
     @NotNull
-    public String UserType;
-    public List<User> Users;
+    private String userType;
+    private List<User> users;
 
-    public UserTypes(int id, String userType, List<User> users){
-        this.Id = id;
-        this.UserType = userType;
-        this.Users = users;
+    public int getId() {
+        return id;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public UserTypes(int id, String userType, List<User> users) {
+        this.id = id;
+        this.userType = userType;
+        this.users = users;
     }
 }

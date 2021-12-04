@@ -3,12 +3,21 @@ package com.improve.discountcalculator.Domain.Model;
 import javax.validation.constraints.NotNull;
 
 public class ItemsCategory {
-    public final int Id;
+    private final int id;
     @NotNull
-    public final String Category;
+    private final String category;
+
 
     public ItemsCategory(int id, String category){
-        this.Id  = id;
-        this.Category = category;
+        this.id  = id;
+        this.category = category;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getCategory() {
+        return category;
     }
 }

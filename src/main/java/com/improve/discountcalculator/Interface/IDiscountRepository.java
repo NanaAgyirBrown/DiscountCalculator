@@ -9,7 +9,6 @@ public interface IDiscountRepository {
     List<ItemsCategory> getAllCategories();
 
     List<Items> getAllShopItems();
-    Optional<Items> getShopItemById(int id);
 
     List<Discounts> getDiscountRules();
     List<Discounts> getDiscountRuleByUserType(int userType);

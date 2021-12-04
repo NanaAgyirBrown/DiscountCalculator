@@ -5,20 +5,40 @@ import java.util.Date;
 import java.util.List;
 
 public class User {
-    public final int Id;
+    private final int id;
     @NotNull
-    public final String Name;
+    private final String name;
     @NotNull
-    public final UserTypes UserType;
+    private final UserTypes userType;
     @NotNull
-    public final Date MembershipDate;
-    public final List<Bill> Bills;
+    private final Date membershipDate;
+    private final List<Bill> bills;
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public UserTypes getUserType() {
+        return userType;
+    }
+
+    public Date getMembershipDate() {
+        return membershipDate;
+    }
+
+    public List<Bill> getBills() {
+        return bills;
+    }
 
     public User(int id, String name, UserTypes userType, Date membershipDate, List<Bill> bills) {
-        Id = id;
-        Name = name;
-        UserType = userType;
-        MembershipDate = membershipDate;
-        Bills = bills;
+        this.id = id;
+        this.name = name;
+        this.userType = userType;
+        this.membershipDate = membershipDate;
+        this.bills = bills;
     }
 }

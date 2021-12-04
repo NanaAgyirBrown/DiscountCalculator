@@ -22,7 +22,7 @@ CREATE TABLE DiscountsTypes(
 
 CREATE TABLE Items (
     Id int NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223 CACHE 200 ),
-    CategotId int references ItemCategory (Id) not null,
+    CategoryId int references ItemCategory (Id) not null,
     ItemName varchar(50) not null,
     UnitPrice decimal not null DEFAULT 0.00
 );

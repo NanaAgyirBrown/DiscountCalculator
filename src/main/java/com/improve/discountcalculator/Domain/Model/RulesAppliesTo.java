@@ -3,13 +3,20 @@ package com.improve.discountcalculator.Domain.Model;
 import javax.validation.constraints.NotNull;
 
 public class RulesAppliesTo {
-    public final int Id;
+    private final int id;
     @NotNull
-    public final String ApplyTo;
+    private final String applyTo;
 
+    public int getId() {
+        return id;
+    }
+
+    public String getApplyTo() {
+        return applyTo;
+    }
 
     public RulesAppliesTo(int id, String applyTo) {
-        Id = id;
-        ApplyTo = applyTo;
+        this.id = id;
+        this.applyTo = applyTo;
     }
 }

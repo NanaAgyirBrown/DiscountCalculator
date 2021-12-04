@@ -37,17 +37,12 @@ public class DiscountRepository implements IDiscountRepository {
         final String query = "select * from Items";
         return _jdbcTemplate.query(query, (resultSet, i) -> {
             int id = resultSet.getInt("Id");
-            int categoryId = resultSet.getInt("CategotId");
+            int categoryId = resultSet.getInt("CategoryId");
             String itemName = resultSet.getString("itemName");
             double unitPrice = resultSet.getDouble("UnitPrice");
 
             return new Items(id, itemName, categoryId, unitPrice);
         });
-    }
-
-    @Override
-    public Optional<Items> getShopItemById(int id) {
-        return Optional.empty();
     }
 
     @Override
@@ -134,7 +129,6 @@ public class DiscountRepository implements IDiscountRepository {
         final String query = "select * from FUNCUSER(?)";
         User customer = _jdbcTemplate.queryForObject(
                 query,
-                new Object[]{Userid},
                 (resultSet, d) -> {
                     int id = resultSet.getInt("Id");
                     String name = resultSet.getString("name");
@@ -148,7 +142,7 @@ public class DiscountRepository implements IDiscountRepository {
                     new UserTypes(userTypeid, userType, null),
                     membership,
                     null);
-        });
+        }, Userid);
 
         return Optional.ofNullable(customer);
     }
