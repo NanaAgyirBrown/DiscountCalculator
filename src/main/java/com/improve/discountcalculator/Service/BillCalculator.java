@@ -17,7 +17,6 @@ public class BillCalculator {
         _discountService = discountService;
     }
 
-
     public Invoice GetBill(Cart cart){
         Invoice invoice = null;
         // search for user
@@ -64,7 +63,7 @@ public class BillCalculator {
 
     }
 
-    private Invoice GetPercentageDiscountBill(List<PrepItems> items, Discounts discountRule, User user){
+    protected Invoice GetPercentageDiscountBill(List<PrepItems> items, Discounts discountRule, User user){
         BigDecimal totalAmount  = new BigDecimal(items.stream().filter(i -> i.getTotalCost() > 0).mapToDouble(t -> t.getTotalCost()).sum()).setScale(2, RoundingMode.CEILING);
         BigDecimal dicountableAmount = new BigDecimal(items.stream().filter(i -> i.getCategoryId() == discountRule.getRuleAppliesTo().getId()).mapToDouble(c -> c.getTotalCost()).sum()).setScale(2, RoundingMode.CEILING);
 
@@ -76,7 +75,7 @@ public class BillCalculator {
                         dicountableAmount, discountAmount, amountPayable);
     }
 
-    private Invoice GetCashDiscountBill(List<PrepItems> items, Discounts discountRule, User user){
+    protected Invoice GetCashDiscountBill(List<PrepItems> items, Discounts discountRule, User user){
         BigDecimal totalAmount = new BigDecimal(items.stream().filter(i -> i.getTotalCost() > 0).mapToDouble(t -> t.getTotalCost()).sum()).setScale(2, RoundingMode.CEILING);
         BigDecimal dicountableAmount = new BigDecimal(totalAmount.doubleValue() - (totalAmount.doubleValue() % 100)).setScale(2, RoundingMode.CEILING);
 
@@ -88,7 +87,7 @@ public class BillCalculator {
                         dicountableAmount, discountAmount, amountPayable);
     }
 
-    private int GetMemberDuration(Date membershipDate){
+    protected int GetMemberDuration(Date membershipDate){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(membershipDate);
 
@@ -99,7 +98,7 @@ public class BillCalculator {
         return (yearDuration * 12) + monthDuration;
     }
 
-    private List<PrepItems> PrepItems(List<CartItem> cartItem){
+    protected List<PrepItems> PrepItems(List<CartItem> cartItem){
         List<PrepItems> preppedItems = new ArrayList<>();
 
         if (cartItem == null || cartItem.size() == 0)

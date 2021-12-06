@@ -1,7 +1,12 @@
 package com.improve.discountcalculator.WebApi;
 
+import br.com.fluentvalidator.Validator;
+import br.com.fluentvalidator.context.Error;
+import br.com.fluentvalidator.context.ValidationResult;
 import com.improve.discountcalculator.Domain.Model.*;
 import com.improve.discountcalculator.Domain.Responses.ApiResponse;
+import com.improve.discountcalculator.Domain.Validations.ValidatorCart;
+import com.improve.discountcalculator.Domain.Validations.ValidatorCartItem;
 import com.improve.discountcalculator.Service.BillCalculator;
 import com.improve.discountcalculator.Service.DiscountService;
 import com.improve.discountcalculator.WebApi.Helpers.*;
@@ -19,6 +24,8 @@ public class DiscountController {
     private final Responses _responses;
     private final DiscountStatus _discountStatus;
     private final BillCalculator _billCalculator;
+    private final Validator<Cart> _validateCart = new ValidatorCart();
+    private final Validator<CartItem> _validateCartItem = new ValidatorCartItem();
 
     @Autowired
     public DiscountController(DiscountService discountService, Responses responses, DiscountStatus discountStatus, BillCalculator billCalculator) {
@@ -146,12 +153,36 @@ public class DiscountController {
     public ApiResponse Cart(@RequestBody Cart cart){
         List<String> messages = new ArrayList<>();
 
+        ValidationResult valResult = _validateCart.validate(cart);
+
+        if (!valResult.isValid()){
+            for(Error error: valResult.getErrors()){
+                messages.add(error.getMessage());
+            };
+
+            return _responses.GetResponse(_operationStatus.Failed, _discountStatus.InValidObject, messages, null);
+        }
+
+        List<ValidationResult> valItemResult = _validateCartItem.validate(cart.getCartItem());
+
+        if (valItemResult.size() > 0){
+            valItemResult.forEach((ValidationResult val) -> {
+                if (!val.isValid()) {
+                    for (Error error : val.getErrors()) {
+                        messages.add(error.getMessage() + " : " + error.getField() + " : " + error.getAttemptedValue());
+                    }
+                }
+            });
+        }
+
+        if(!messages.isEmpty())
+            return _responses.GetResponse(_operationStatus.Failed, _discountStatus.InValidObject, messages, null);
+
         try{
             var invoice = _billCalculator.GetBill(cart);
-
             if(invoice == null || invoice.getBillId().equals("")){
                 messages.add("Your invoice could not be calculated.");
-                return _responses.GetResponse(_operationStatus.Failed, _discountStatus.InValidObject, messages, invoice);
+                return _responses.GetResponse(_operationStatus.Failed, _discountStatus.NotFound, messages, invoice);
             }
 
             messages.add("Discounted Invoice attached");
