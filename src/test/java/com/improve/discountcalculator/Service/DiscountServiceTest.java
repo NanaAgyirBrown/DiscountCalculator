@@ -13,7 +13,6 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class DiscountServiceTest {
-
     @Mock
     private IDiscountRepository _discountRepo;
     private DiscountService underTest;

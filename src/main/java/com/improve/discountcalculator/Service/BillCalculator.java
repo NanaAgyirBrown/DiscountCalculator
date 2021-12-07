@@ -105,14 +105,16 @@ public class BillCalculator {
             return preppedItems;
 
         for (CartItem item : cartItem) {
-            if(item.getItem() == 0)
+            if (item.getItem() == 0)
                 return null;
 
             var newItem = _discountService.getAllShopItems().stream().filter(i -> i.getId() == item.getItem()).findAny().orElse(null);
 
-            preppedItems.add(
-                    new PrepItems(item.getQuantity(), (item.getQuantity() * newItem.getUnitPrice()), newItem.getId(), newItem.getItemName(),
-                    newItem.getCategoryId(), newItem.getUnitPrice()));
+            if (newItem != null) {
+                preppedItems.add(
+                        new PrepItems(item.getQuantity(), (item.getQuantity() * newItem.getUnitPrice()), newItem.getId(), newItem.getItemName(),
+                                newItem.getCategoryId(), newItem.getUnitPrice()));
+            }
         }
 
         return preppedItems;
