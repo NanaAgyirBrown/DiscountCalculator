@@ -28,7 +28,7 @@
 
  ### API Documentation
  > * The solution is served in a browser with an Interactive Swagger OpenAPI documentation.
- > * The documentation can be accessed at **https://{your_baseurl}:{OPTIONAL- Port}/swagger/index.html**
+ > * The documentation can be accessed at **https://{your_baseurl}:{OPTIONAL- Port}/swagger-ui.html**
 
 ***
  
