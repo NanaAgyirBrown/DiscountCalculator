@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequestMapping("api/v1/discount")
 @RestController
+@RequestMapping("/api/v1/discount")
 public class DiscountController {
     private final DiscountService discountService;
     private OperationStatus _operationStatus;

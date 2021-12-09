@@ -3,10 +3,10 @@ package com.improve.discountcalculator.fakedata;
 import com.improve.discountcalculator.Domain.Model.User;
 import com.improve.discountcalculator.Domain.Model.UserTypes;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class TestUser {
     private List<User> testUsers(){
@@ -22,8 +22,8 @@ public class TestUser {
         return userList;
     }
 
-    public User getTestUser(int userId){
-        return testUsers().stream().filter(u -> u.getId() == userId).findFirst().orElse(null);
+    public Optional<User> getTestUser(int userId){
+        return testUsers().stream().filter(u -> u.getId() == userId).findFirst();
     }
 }
 

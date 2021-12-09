@@ -20,7 +20,7 @@ public class BillCalculator {
     public Invoice GetBill(Cart cart){
         Invoice invoice = null;
         // search for user
-        var user = _discountService.getCustomerById(cart.getUser()).get();
+        var user = _discountService.getCustomerById(cart.getUser()).orElse(null);
 
         if(user == null){
             return invoice;
@@ -63,7 +63,7 @@ public class BillCalculator {
 
     }
 
-    protected Invoice GetPercentageDiscountBill(List<PrepItems> items, Discounts discountRule, User user){
+    private Invoice GetPercentageDiscountBill(List<PrepItems> items, Discounts discountRule, User user){
         BigDecimal totalAmount  = new BigDecimal(items.stream().filter(i -> i.getTotalCost() > 0).mapToDouble(t -> t.getTotalCost()).sum()).setScale(2, RoundingMode.CEILING);
         BigDecimal dicountableAmount = new BigDecimal(items.stream().filter(i -> i.getCategoryId() == discountRule.getRuleAppliesTo().getId()).mapToDouble(c -> c.getTotalCost()).sum()).setScale(2, RoundingMode.CEILING);
 
@@ -75,7 +75,7 @@ public class BillCalculator {
                         dicountableAmount, discountAmount, amountPayable);
     }
 
-    protected Invoice GetCashDiscountBill(List<PrepItems> items, Discounts discountRule, User user){
+    private Invoice GetCashDiscountBill(List<PrepItems> items, Discounts discountRule, User user){
         BigDecimal totalAmount = new BigDecimal(items.stream().filter(i -> i.getTotalCost() > 0).mapToDouble(t -> t.getTotalCost()).sum()).setScale(2, RoundingMode.CEILING);
         BigDecimal dicountableAmount = new BigDecimal(totalAmount.doubleValue() - (totalAmount.doubleValue() % 100)).setScale(2, RoundingMode.CEILING);
 
@@ -87,7 +87,7 @@ public class BillCalculator {
                         dicountableAmount, discountAmount, amountPayable);
     }
 
-    protected int GetMemberDuration(Date membershipDate){
+    private int GetMemberDuration(Date membershipDate){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(membershipDate);
 
@@ -98,7 +98,7 @@ public class BillCalculator {
         return (yearDuration * 12) + monthDuration;
     }
 
-    protected List<PrepItems> PrepItems(List<CartItem> cartItem){
+    private List<PrepItems> PrepItems(List<CartItem> cartItem){
         List<PrepItems> preppedItems = new ArrayList<>();
 
         if (cartItem == null || cartItem.size() == 0)
